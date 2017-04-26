@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Technology stack (Client): - NodeJS, Grunt, Bower, AngularJS",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "gzippo": "^0.2.0"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "grunt": "^1.0.1",
+    "grunt-bower-concat": "^0.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express": "^1.4.1",
+    "grunt-open": "^0.2.3",
+    "grunt-parallel": "^0.5.1"
+  }
+}
