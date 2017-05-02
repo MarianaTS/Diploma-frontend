@@ -13,5 +13,7 @@
     "angular-ui-router": "^0.4.2",
     "ngUpload": "^0.5.19"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-img-cropper": "^1.1.0"
+  }
 }

@@ -7,11 +7,11 @@
         <div class="row main">
         <div class="col-sm-2 col-lg-2 col-md-2 navBar ">
             <ul class="navItems">
-                <li>DOWNLOAD</li>
-                <li>CONFIGURE</li>
-                <li>RESULT</li>
-                <li>SEND RESULT TO EMAIL</li>
-                <li>CONTACT US</li>
+                <li ng-click = "showDownload()">DOWNLOAD</li>
+                <li ng-click = "showConfig()">CONFIGURE</li>
+                <li ng-click = "showResult()">RESULT</li>
+                <li ng-click = "showSend()">SEND RESULT TO EMAIL</li>
+                <li ng-click = "showContact()">CONTACT US</li>
             </ul>
         </div>
 
@@ -25,11 +25,52 @@
                 <img src="{{uploadme}}" width="800" height="400"  alt="Image preview...">
             </div>
             </div>
-            <div class="row main ng-show-add" ng-show="configVariable">
-                <div class="col-sm-8 col-lg-8 col-md-8 plot"><img src="{{uploadme}}" width="900"  alt="Image preview..."></div>
-                <div class="col-sm-4 col-lg-4 col-md-4 config"></div>
+
+            <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 config ng-show-add row" ng-show="configVariable">
+                <div class = "col-sm-12 col-lg-6 col-md-6 ">
+                    <canvas width="500" height="300" id="canvas" image-cropper image="uploadme" cropped-image="cropper.croppedImage" crop-width="400" crop-height="200" keep-aspect="true" touch-radius="10" crop-area-bounds="bounds" class = "imgCrop"></canvas>
+                    <br>
+                    <br>
+                    <div class="crop" ng-click = "crop()">CROP </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6">
+                    <form action="" class="resultForm">
+                        X:
+                        <input type="text" placeholder="-10">
+                        <input type="text" placeholder="10">
+                        <br>
+                        Y:
+                        <input type="text" placeholder="-10">
+                        <input type="text" placeholder="10">
+                        <br>
+                        H:
+                        <input type="text" placeholder="0.1">
+                        <br>
+                        <br>
+                        <input type="submit" value="RESULT" class="getResult">
+
+                    </form>
+                </div>
+
             </div>
 
+            <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 result ng-show-add" ng-show="resultVariable">
+            </div>
+
+            <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 send ng-show-add" ng-show="sendVariable">
+            </div>
+
+            <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 contact ng-show-add" ng-show="contactVariable">
+            <form class="responseForm">
+                <input type="text" placeholder="Your name" ng-model = "name" required="true">
+                <br>
+                <textarea ng-model="response" cols="30" rows="10" placeholder="Your response or question" required="true"></textarea>
+                <br>
+                <br>
+                <br>
+                <input type="submit" class="sendResponse" ng-click = "sendResponse(name, response)" value = "SEND">
+            </form>
+            </div>
     </div>
 </div>
  

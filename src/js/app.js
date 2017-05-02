@@ -1,9 +1,9 @@
-var app = angular.module('app', [ 'ngRoute']);
+var app = angular.module('app', [ 'ngRoute', 'angular-img-cropper']);
 
 app.config([ '$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', { 
-			templateUrl: './templates/plot_reader.html', 
+			templateUrl: './templates/start.html', 
 			controller: 'startController'
 		})
 		.when('/plot_reader', { 

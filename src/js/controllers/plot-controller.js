@@ -1,11 +1,73 @@
 app.controller('plotController', function($scope, $http) {
- $scope.configVariable = false;
- $scope.imgVariable = true;
+
+$scope.configVariable = false;
+$scope.imgVariable = true;
+$scope.resultVariable = false;
+$scope.sendVariable = false;
+$scope.contactVariable = false;
+$scope.name = " ";
+$scope.response = " ";
+$scope.uploadme = " ";
+$scope.cropper = {};
+$scope.cropper.sourceImage = null;
+$scope.cropper.croppedImage   = null;
+$scope.bounds = {};
+$scope.bounds.left = 0;
+$scope.bounds.right = 0;
+$scope.bounds.top = 0;
+$scope.bounds.bottom = 0;
+
+
 
 $scope.showConfig = function() {
-	$scope.configVariable = true;
-	$scope.imgVariable = false;
+	 $scope.configVariable = true;
+	 $scope.imgVariable = false;
+	 $scope.resultVariable = false;
+	 $scope.sendVariable = false;
+	 $scope.contactVariable = false;
 };
+
+$scope.showDownload = function() {
+	 $scope.configVariable = false;
+	 $scope.imgVariable = true;
+	 $scope.resultVariable = false;
+	 $scope.sendVariable = false;
+	 $scope.contactVariable = false;
+};
+
+$scope.showResult = function() {
+	 $scope.configVariable = false;
+	 $scope.imgVariable = false;
+	 $scope.resultVariable = true;
+	 $scope.sendVariable = false;
+	 $scope.contactVariable = false;
+};
+
+$scope.showSend = function() {
+	 $scope.configVariable = false;
+	 $scope.imgVariable = false;
+	 $scope.resultVariable = false;
+	 $scope.sendVariable = true;
+	 $scope.contactVariable = false;
+};
+
+$scope.showContact = function() {
+	 $scope.configVariable = false;
+	 $scope.imgVariable = false;
+	 $scope.resultVariable = false;
+	 $scope.sendVariable = false;
+	 $scope.contactVariable = true;
+};
+
+$scope.sendResponse = function(name, response) {
+	console.log("Sended "+name+" "+ response);
+};
+
+$scope.crop = function() {
+	$scope.uploadme = $scope.cropper.croppedImage;
+	$scope.cropper.croppedImage = null;
+};
+
 
     $scope.uploadImage = function() {
       var fd = new FormData();
