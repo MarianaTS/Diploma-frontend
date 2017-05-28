@@ -1,9 +1,9 @@
-var app = angular.module('app', [ 'ngRoute', 'angular-img-cropper']);
+var app = angular.module('app', [ 'ngRoute', 'angular-img-cropper', 'angularUtils.directives.dirPagination']);
 
 app.config([ '$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', { 
-			templateUrl: './templates/start.html', 
+			templateUrl: './templates/start.html',
 			controller: 'startController'
 		})
 		.when('/plot_reader', { 

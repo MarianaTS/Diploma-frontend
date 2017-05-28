@@ -85,7 +85,6 @@ function dotGraph() {
     height = window.innerHeight;
     canvas.width=width;
     canvas.height=height;
-    console.log(width + ", " + height);
   };
   
   window.addEventListener("resize", function () {

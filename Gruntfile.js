@@ -48,7 +48,7 @@ module.exports = function(grunt) {
           'src/js/<%= pkg.name %>.js',
           'src/env/<%= env %>.js',
           'src/js/controllers/**/*.js',
-          'src/js/service/**/*.js'],
+          'src/js/services/**/*.js'],
         dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
@@ -66,17 +66,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      options: {
-        jshintrc: true
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      src: {
-        src: ['src/**/*.js']
-      }
-    },
 
     compass: {
       dist: {
@@ -112,6 +101,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-open');
 
-  grunt.registerTask('build', ['jshint', 'clean', 'concat', 'bower_concat', 'copy', 'compass']);
+  grunt.registerTask('build', ['clean', 'concat', 'bower_concat', 'copy', 'compass']);
   grunt.registerTask('serve', ['build', 'express', 'open', 'watch']);
 };

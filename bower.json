@@ -14,6 +14,7 @@
     "ngUpload": "^0.5.19"
   },
   "dependencies": {
-    "angular-img-cropper": "^1.1.0"
+    "angular-img-cropper": "^1.1.0",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1"
   }
 }

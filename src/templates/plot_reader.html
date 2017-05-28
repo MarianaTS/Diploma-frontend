@@ -7,70 +7,109 @@
         <div class="row main">
         <div class="col-sm-2 col-lg-2 col-md-2 navBar ">
             <ul class="navItems">
-                <li ng-click = "showDownload()">DOWNLOAD</li>
-                <li ng-click = "showConfig()">CONFIGURE</li>
-                <li ng-click = "showResult()">RESULT</li>
-                <li ng-click = "showSend()">SEND RESULT TO EMAIL</li>
-                <li ng-click = "showContact()">CONTACT US</li>
+                <li ng-click = "showDownload()" class = "item menuItem">DOWNLOAD</li>
+                <li ng-click = "showConfig()" class = "item menuItem">CONFIGURE</li>
+                <li ng-click = "showResult()" class = "item  menuItem">RESULT</li>
+                <li ng-click = "showSend()" class = "item menuItem">SAVE RESULT</li>
             </ul>
         </div>
 
             <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 imagedownl ng-show-add " ng-show="imgVariable">
-                <div class="downloadForm">
+
+            <div class="img">
+                <div class = "col-sm-12 col-lg-6 col-md-6 ">
+                    <canvas width="900" height="500" id="canvas" image-cropper image="uploadme" cropped-image="cropper.croppedImage" crop-width="400" crop-height="200" keep-aspect="true" touch-radius="10" crop-area-bounds="bounds" class = "imgCrop"></canvas>
+                    <br>
+                    <br>
+                </div>
+            </div>
+                <div class="downloadForm" style="margin-top: 550px">
                     <input type="file"  id="file" class="inputfile" fileread="uploadme" />
                     <label for="file" fileread="uploadme">Choose a image</label>
-                    <br/>
                 </div>
-            <div class="img">
-                <img src="{{uploadme}}" width="800" height="400"  alt="Image preview...">
-            </div>
+                <div class="crop" ng-click = "crop()" style="margin-top: 550px">Crop </div>
             </div>
 
             <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 config ng-show-add row" ng-show="configVariable">
-                <div class = "col-sm-12 col-lg-6 col-md-6 ">
-                    <canvas width="500" height="300" id="canvas" image-cropper image="uploadme" cropped-image="cropper.croppedImage" crop-width="400" crop-height="200" keep-aspect="true" touch-radius="10" crop-area-bounds="bounds" class = "imgCrop"></canvas>
-                    <br>
-                    <br>
-                    <div class="crop" ng-click = "crop()">CROP </div>
+                <div class = "config-group">
+                <div class="imageSimple col-lg-4 col-md-4" >
+                    <img src="{{uploadme}}" width="600" height="400"  alt="Image preview...">
                 </div>
-                <div class="col-sm-12 col-lg-6 col-md-6">
-                    <form action="" class="resultForm">
+                <div class="col-sm-offset-1 col-lg-offset-1 col-md-offset-1 col-lg-4 col-md-4">
+                    <form class="resultForm">
                         X:
-                        <input type="text" placeholder="-10">
-                        <input type="text" placeholder="10">
+                        <input type="text" placeholder="-10" ng-model="startX">
+                        <input type="text" placeholder="10" ng-model="endX">
                         <br>
                         Y:
-                        <input type="text" placeholder="-10">
-                        <input type="text" placeholder="10">
+                        <input type="text" placeholder="-10" ng-model="startY">
+                        <input type="text" placeholder="10" ng-model="endY">
                         <br>
                         H:
-                        <input type="text" placeholder="0.1">
+                        <input type="text" placeholder="0.1" ng-model="h">
                         <br>
                         <br>
-                        <input type="submit" value="RESULT" class="getResult">
-
+                        <input type="submit"  class="getResult" ng-click="getResult(startX, startY, endX, endY, h)">
                     </form>
                 </div>
-
+                </div>
             </div>
 
             <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 result ng-show-add" ng-show="resultVariable">
+                <table class="table">
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                    </tr>
+                    <tr dir-paginate="coordinate in result | itemsPerPage: 15">
+                        <td>{{coordinate.x}}</td>
+                        <td>{{coordinate.y}}</td>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <dir-pagination-controls max-size="10"></dir-pagination-controls>
+                </div>
             </div>
 
             <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 send ng-show-add" ng-show="sendVariable">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-lg-6">
+                        <form class = "emailForm">
+                            <label for="email" style="font-size: 15px;">You can send results to email or download text file</label>
+                            <br>
+                            <br>
+                            <input type="email" placeholder = "Your email address" id ="email"  ng-model="email" required>
+                            <br>
+                            <br>
+                            <div class="sendOnEmail" ng-click="sendToEmail(email, result)">Send</div>
+                        </form>
+                        <br>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-lg-6">
+                        <form class="iconDownload">
+                            <i class="icon-download"></i>
+                        </form>
+                        <hr>
+                        <ul class="exportItems">
+                            <li><a href="#" data-ng-click="exportAction('csv')"> Export CSV</a></li>
+                            <li><a href="#" data-ng-click="exportAction('excel')"> Export Excel</a></li>
+                            <li><a href="#" data-ng-click="exportAction('doc')"> Export Doc</a></li>
+                            <li><a href="#" data-ng-click="exportAction('pdf')"> Export Pdf</a></li>
+                        </ul>
+                        <table class="table export-table">
+                            <tr>
+                                <th>X</th>
+                                <th>Y</th>
+                            </tr>
+                            <tr ng-repeat="coordinate in result">
+                                <td>{{coordinate.x}}</td>
+                                <td>{{coordinate.y}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-sm-10 col-lg-9 col-md-9 col-md-offset-1 col-lg-offset-1 contact ng-show-add" ng-show="contactVariable">
-            <form class="responseForm">
-                <input type="text" placeholder="Your name" ng-model = "name" required="true">
-                <br>
-                <textarea ng-model="response" cols="30" rows="10" placeholder="Your response or question" required="true"></textarea>
-                <br>
-                <br>
-                <br>
-                <input type="submit" class="sendResponse" ng-click = "sendResponse(name, response)" value = "SEND">
-            </form>
-            </div>
+        </div>
     </div>
 </div>
  
